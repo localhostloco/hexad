@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+mvn clean install compile test
+mvn exec:java -Dexec.mainClass="com.hexad.parking.Main" -Dexec.args=$1
