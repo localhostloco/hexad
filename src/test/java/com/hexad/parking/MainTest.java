@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MainTest {
 
   private List<String> args;
-  private final String APP_ARGUMENT = "parking_lot";
   private final String resourcesPath = "src/test/java/resources";
   private String[] argsArray = {};
 
@@ -23,7 +22,6 @@ public class MainTest {
   @Before
   public void setup() {
     args = new ArrayList<>();
-    args.add(APP_ARGUMENT);
   }
 
   @Test
