@@ -10,4 +10,7 @@ public class MainTest {
   public void nullArgumentsThrowAssertionError() {
     assertThrows(AssertionError.class, () -> Main.main(null));
   }
+
+  @Test
+  public void canCreateParkingLot() {}
 }
