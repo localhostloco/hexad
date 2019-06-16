@@ -12,6 +12,7 @@ public class ParkingSpot {
 
   public void parkCar(Car car) {
     this.parkedCar = car;
+    isSpotFree = false;
   }
 
   public void carLeaves() {
