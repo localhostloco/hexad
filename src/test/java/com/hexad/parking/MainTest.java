@@ -26,6 +26,7 @@ public class MainTest {
     "checkStatus.in",
     "carPlatesByColor.in",
     "slotByPlates.in",
+    "slotsByColor.in",
     "1.in"
   };
 
@@ -92,6 +93,14 @@ public class MainTest {
     System.setOut(new PrintStream(outContent));
     setFileAndRun(inputTestFiles[5]);
     String plates = readFromFile("slotByPlates.out");
+    Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
+  }
+
+  @Test
+  public void canGetSlotsByColor() throws IOException {
+    System.setOut(new PrintStream(outContent));
+    setFileAndRun(inputTestFiles[6]);
+    String plates = readFromFile("slotsByColor.out");
     Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
   }
 
