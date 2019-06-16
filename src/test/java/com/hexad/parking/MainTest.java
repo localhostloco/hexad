@@ -2,7 +2,6 @@ package com.hexad.parking;
 
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingSpot;
-import com.hexad.parking.facades.ParkingLotFacade;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +18,6 @@ public class MainTest {
   private String[] argsArray = {};
 
   private String[] testFiles = {"createParkingLot.in", "parkCar.in", "carLeaves.in", "1.in"};
-  private ParkingLotFacade parkingLotFacade;
 
   @Before
   public void setup() {
