@@ -1,10 +1,10 @@
 package com.hexad.parking;
 
 import com.hexad.parking.enums.Commands;
-import com.hexad.parking.models.Car;
-import com.hexad.parking.models.ParkingLot;
 import com.hexad.parking.facades.ParkingLotFacade;
 import com.hexad.parking.facades.ParkingLotFacadeImpl;
+import com.hexad.parking.models.Car;
+import com.hexad.parking.models.ParkingLot;
 import org.junit.Assert;
 
 import java.nio.file.Files;
@@ -66,6 +66,9 @@ public class Main {
         break;
       case leave:
         handleCarLeaves(commandAndArgs);
+        break;
+      case status:
+        handlePrintStatus(commandAndArgs);
       default:
         break;
     }
@@ -98,6 +101,15 @@ public class Main {
     Assert.assertEquals(
         String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
     parkingLotFacade.carLeaves(getParkingLot(), Integer.valueOf(commandAndArgs[1]));
+  }
+
+  private static void handlePrintStatus(String[] commandAndArgs) throws Exception {
+    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
+    int argsFromInput = commandAndArgs.length - 1;
+    int numberOfArgs = status.getNumberOfArgs();
+    Assert.assertEquals(
+        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    parkingLotFacade.printStatus(getParkingLot());
   }
 
   public static ParkingLot getParkingLot() {
