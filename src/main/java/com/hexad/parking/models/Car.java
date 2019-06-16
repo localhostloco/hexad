@@ -16,4 +16,8 @@ public class Car {
   public String getPlate() {
     return plate;
   }
+
+  public boolean isCarThisColor(String color) {
+    return this.color.equals(color);
+  }
 }
