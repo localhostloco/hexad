@@ -1,5 +1,6 @@
 package com.hexad.parking.facades;
 
+import com.hexad.parking.exceptions.ParkingException;
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingLot;
 import com.hexad.parking.models.ParkingSpot;
@@ -16,7 +17,7 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
     System.out.println(String.format("Created a parking lot with %d slots", spots));
     try {
       return new ParkingLot(spots);
-    } catch (Exception e) {
+    } catch (ParkingException e) {
       e.printStackTrace();
     }
     return null;
@@ -29,7 +30,7 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
   public void carLeaves(ParkingLot parkingLot, int spot) {
     try {
       System.out.println(parkingLot.carLeaves(spot));
-    } catch (Exception e) {
+    } catch (ParkingException e) {
       e.printStackTrace();
     }
   }

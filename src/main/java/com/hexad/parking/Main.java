@@ -25,7 +25,7 @@ public class Main {
             line -> {
               try {
                 interpretCommand(line);
-              } catch (Exception e) {
+              } catch (ParkingException e) {
                 e.printStackTrace();
               }
             });
@@ -39,7 +39,7 @@ public class Main {
       while (scanner.hasNext()) {
         try {
           interpretCommand(scanner.nextLine());
-        } catch (Exception e) {
+        } catch (ParkingException e) {
           e.printStackTrace();
         }
       }
