@@ -63,6 +63,9 @@ public class Main {
         break;
       case park:
         handleParkCar(commandAndArgs);
+        break;
+      case leave:
+        handleCarLeaves(commandAndArgs);
       default:
         break;
     }
@@ -85,7 +88,16 @@ public class Main {
     Assert.assertEquals(
         String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
     Car car = new Car(commandAndArgs[1], commandAndArgs[2]);
-    parkingLotService.parkCar(getParkingLot(), car);
+    parkingLotFacade.parkCar(getParkingLot(), car);
+  }
+
+  private static void handleCarLeaves(String[] commandAndArgs) throws Exception {
+    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
+    int argsFromInput = commandAndArgs.length - 1;
+    int numberOfArgs = leave.getNumberOfArgs();
+    Assert.assertEquals(
+        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    parkingLotFacade.carLeaves(getParkingLot(), Integer.valueOf(commandAndArgs[1]));
   }
 
   public static ParkingLot getParkingLot() {
