@@ -1,9 +1,7 @@
 package com.hexad.parking;
 
 import com.hexad.parking.enums.Commands;
-import com.hexad.parking.facades.ParkingLotFacade;
 import com.hexad.parking.facades.ParkingLotFacadeImpl;
-import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingLot;
 import org.junit.Assert;
 
@@ -12,12 +10,10 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-import static com.hexad.parking.enums.Commands.*;
+import static com.hexad.parking.helpers.CommandHandler.*;
 
 public class Main {
 
-  private static String invalidNumberOfArgs = "invalid number of arguments (expected: %d)";
-  private static ParkingLotFacade parkingLotFacade;
   private static ParkingLot parkingLot;
 
   public static void main(String[] args) {
@@ -59,97 +55,37 @@ public class Main {
           String.format("%s is not supported at the moment", commandAndArgs[0]));
     switch (comm) {
       case create_parking_lot:
-        handleCreateParkingLot(commandAndArgs);
+        handleCreateParkingLot(getParkingLot(), commandAndArgs);
         break;
       case park:
-        handleParkCar(commandAndArgs);
+        handleParkCar(getParkingLot(), commandAndArgs);
         break;
       case leave:
-        handleCarLeaves(commandAndArgs);
+        handleCarLeaves(getParkingLot(), commandAndArgs);
         break;
       case status:
-        handlePrintStatus(commandAndArgs);
+        handlePrintStatus(getParkingLot(), commandAndArgs);
         break;
       case registration_numbers_for_cars_with_colour:
-        handlePlatesByColor(commandAndArgs);
+        handlePlatesByColor(getParkingLot(), commandAndArgs);
         break;
       case slot_number_for_registration_number:
-        handleSlotByCarPlates(commandAndArgs);
+        handleSlotByCarPlates(getParkingLot(), commandAndArgs);
         break;
       case slot_numbers_for_cars_with_colour:
-        handleSlotsByColor(commandAndArgs);
+        handleSlotsByColor(getParkingLot(), commandAndArgs);
       default:
         break;
     }
     return commandAndArgs;
   }
 
-  private static void handleCreateParkingLot(String[] commandAndArgs) throws Exception {
-    if (null != getParkingLot()) throw new Exception("ParkingLot already created!");
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = create_parking_lot.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    parkingLot = parkingLotFacade.createParkingLot(Integer.valueOf(commandAndArgs[1]));
-  }
-
-  private static void handleParkCar(String[] commandAndArgs) throws Exception {
-    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = park.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    Car car = new Car(commandAndArgs[1], commandAndArgs[2]);
-    parkingLotFacade.parkCar(getParkingLot(), car);
-  }
-
-  private static void handleCarLeaves(String[] commandAndArgs) throws Exception {
-    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = leave.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    parkingLotFacade.carLeaves(getParkingLot(), Integer.valueOf(commandAndArgs[1]));
-  }
-
-  private static void handlePrintStatus(String[] commandAndArgs) throws Exception {
-    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = status.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    parkingLotFacade.printStatus(getParkingLot());
-  }
-
-  private static void handlePlatesByColor(String[] commandAndArgs) throws Exception {
-    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = registration_numbers_for_cars_with_colour.getNumberOfArgs();
-    Assert.assertEquals(
-            String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    parkingLotFacade.getPlatesByColor(getParkingLot(), commandAndArgs[1]);
-  }
-
-  private static void handleSlotByCarPlates(String[] commandAndArgs) throws Exception {
-    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = slot_number_for_registration_number.getNumberOfArgs();
-    Assert.assertEquals(
-            String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    parkingLotFacade.getSlotByPlates(getParkingLot(), commandAndArgs[1]);
-  }
-
-  private static void handleSlotsByColor(String[] commandAndArgs) throws Exception {
-    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = slot_numbers_for_cars_with_colour.getNumberOfArgs();
-    Assert.assertEquals(
-            String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    parkingLotFacade.getSlotsByColor(getParkingLot(), commandAndArgs[1]);
-  }
-
   public static ParkingLot getParkingLot() {
     return parkingLot;
+  }
+
+  public static void setParkingLot(ParkingLot parkingLot) {
+    Main.parkingLot = parkingLot;
   }
 
   protected static void restart() {
