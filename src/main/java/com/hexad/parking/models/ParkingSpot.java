@@ -18,4 +18,8 @@ public class ParkingSpot {
     this.parkedCar = null;
     this.isSpotFree = true;
   }
+
+  public Car getParkedCar() {
+    return parkedCar;
+  }
 }
