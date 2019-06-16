@@ -73,6 +73,9 @@ public class Main {
       case registration_numbers_for_cars_with_colour:
         handlePlatesByColor(commandAndArgs);
         break;
+      case slot_number_for_registration_number:
+        handleSlotByCarPlates(commandAndArgs);
+        break;
       default:
         break;
     }
@@ -123,6 +126,15 @@ public class Main {
     Assert.assertEquals(
             String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
     parkingLotFacade.getPlatesByColor(getParkingLot(), commandAndArgs[1]);
+  }
+
+  private static void handleSlotByCarPlates(String[] commandAndArgs) throws Exception {
+    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
+    int argsFromInput = commandAndArgs.length - 1;
+    int numberOfArgs = slot_number_for_registration_number.getNumberOfArgs();
+    Assert.assertEquals(
+            String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    parkingLotFacade.getSlotByPlates(getParkingLot(), commandAndArgs[1]);
   }
 
   public static ParkingLot getParkingLot() {
