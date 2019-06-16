@@ -15,12 +15,13 @@ public class CommandHandler {
 
   private static ParkingLotFacade parkingLotFacade;
 
-  private static String invalidNumberOfArgs = "invalid number of arguments (expected: %d)";
-  private static String PARKING_LOT_NOT_CREATED = "ParkingLot has not been created yet!";
+  private static final String PARKING_LOT_ALREADY_CREATED = "ParkingLot already created!";
+  private static final String invalidNumberOfArgs = "invalid number of arguments (expected: %d)";
+  private static final String PARKING_LOT_NOT_CREATED = "ParkingLot has not been created yet!";
 
   public static void handleCreateParkingLot(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    if (null != parkingLot) throw new Exception("ParkingLot already created!");
+    if (null != parkingLot) throw new Exception(PARKING_LOT_ALREADY_CREATED);
     int argsFromInput = commandAndArgs.length - 1;
     int numberOfArgs = create_parking_lot.getNumberOfArgs();
     Assert.assertEquals(
