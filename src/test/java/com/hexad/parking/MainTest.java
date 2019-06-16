@@ -33,7 +33,7 @@ public class MainTest {
   @Test
   public void canCreateParkingLot() {
     setFileAndRun(testFiles[0]);
-    Assert.assertEquals("ParkingLot's spots do not match", Main.getParkingLot().getSize(), 1);
+    Assert.assertEquals("ParkingLot's spots do not match", 1, Main.getParkingLot().getSize());
   }
 
   @Test
@@ -51,7 +51,7 @@ public class MainTest {
     setFileAndRun(testFiles[2]);
     ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
     Car parkedCar = parkingSpot.getParkedCar();
-    Assert.assertEquals("There shouldn't be a Car parked but there is", parkedCar, null);
+    Assert.assertEquals("There shouldn't be a Car parked but there is", null, parkedCar);
   }
 
   private void setFileAndRun(String filename) {
