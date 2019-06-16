@@ -1,5 +1,7 @@
 package com.hexad.parking;
 
+import com.hexad.parking.models.Car;
+import com.hexad.parking.models.ParkingSpot;
 import com.hexad.parking.services.ParkingLotService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,7 +18,7 @@ public class MainTest {
   private final String resourcesPath = "src/test/java/resources";
   private String[] argsArray = {};
 
-  private String[] testFiles = {"createParkingLot.in", "1.in"};
+  private String[] testFiles = {"createParkingLot.in", "parkCar.in", "1.in"};
   private ParkingLotService parkingLotService;
 
   @Before
@@ -33,6 +35,15 @@ public class MainTest {
   public void canCreateParkingLot() {
     setFileAndRun(testFiles[0]);
     Assert.assertEquals("ParkingLot's spots do not match", Main.getParkingLot().getSize(), 1);
+  }
+
+  @Test
+  public void canParkCar() {
+    setFileAndRun(testFiles[1]);
+    Car car = new Car("KA-01-HH-1234", "White");
+    ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(1);
+    Car parkedCar = parkingSpot.getParkedCar();
+    Assert.assertEquals("Car does not match", parkedCar, car);
   }
 
   private void setFileAndRun(String filename) {
