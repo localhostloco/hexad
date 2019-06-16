@@ -25,7 +25,7 @@ public class Main {
     // file input
     if (args.length > 0) {
       try (Stream<String> stream = Files.lines(Paths.get(args[0]))) {
-        stream.forEach(
+        stream.forEachOrdered(
             line -> {
               try {
                 interpretCommand(line);
