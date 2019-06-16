@@ -2,6 +2,7 @@ package com.hexad.parking.models;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class ParkingLot {
 
@@ -22,12 +23,28 @@ public class ParkingLot {
   }
 
   public String parkCar(Car car) {
-    String message = "";
+    String message;
+    if (isFull) message = "Sorry, parking lot is full";
+    else {
+      ParkingSpot parkingSpot = getParkingSpotBySlot(nextAvailableSpot);
+      parkingSpot.parkCar(car);
+      message = String.format("Allocated slot number: %d", nextAvailableSpot + 1);
+      calculateNextAvailableSpot();
+    }
     return message;
   }
 
   public ParkingSpot getParkingSpotBySlot(int slot) {
     if (slot > availableSpots.size()) return null;
-    else return availableSpots.get(slot - 1);
+    else return availableSpots.get(slot);
+  }
+
+  private void calculateNextAvailableSpot() {
+    Optional<ParkingSpot> freeSpot =
+        availableSpots.stream().filter(ParkingSpot::isSpotFree).findFirst();
+    isFull = !freeSpot.isPresent();
+    if (isFull) {
+      nextAvailableSpot = null;
+    } else nextAvailableSpot = freeSpot.get().getSlot();
   }
 }
