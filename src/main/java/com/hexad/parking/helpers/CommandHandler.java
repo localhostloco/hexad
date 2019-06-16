@@ -22,8 +22,11 @@ public class CommandHandler {
 
   public static void handleCreateParkingLot(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    initializeHandlerMethod(
-        parkingLot, PARKING_LOT_ALREADY_CREATED, commandAndArgs, create_parking_lot);
+    if (null != parkingLot) throw new Exception(PARKING_LOT_ALREADY_CREATED);
+    int argsFromInput = commandAndArgs.length - 1;
+    int numberOfArgs = create_parking_lot.getNumberOfArgs();
+    Assert.assertEquals(
+        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
     setParkingLot(
         getParkingLotFacadeInstance().createParkingLot(Integer.valueOf(commandAndArgs[1])));
   }
