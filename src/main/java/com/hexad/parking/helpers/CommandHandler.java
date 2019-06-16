@@ -1,5 +1,6 @@
 package com.hexad.parking.helpers;
 
+import com.hexad.parking.enums.Commands;
 import com.hexad.parking.facades.ParkingLotFacade;
 import com.hexad.parking.facades.ParkingLotFacadeImpl;
 import com.hexad.parking.models.Car;
@@ -21,74 +22,63 @@ public class CommandHandler {
 
   public static void handleCreateParkingLot(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    if (null != parkingLot) throw new Exception(PARKING_LOT_ALREADY_CREATED);
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = create_parking_lot.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    initializeHandlerMethod(
+        parkingLot, PARKING_LOT_ALREADY_CREATED, commandAndArgs, create_parking_lot);
     setParkingLot(
         getParkingLotFacadeInstance().createParkingLot(Integer.valueOf(commandAndArgs[1])));
   }
 
   public static void handleParkCar(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    if (null == parkingLot) throw new Exception(PARKING_LOT_NOT_CREATED);
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = park.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    initializeHandlerMethod(parkingLot, PARKING_LOT_NOT_CREATED, commandAndArgs, park);
     Car car = new Car(commandAndArgs[1], commandAndArgs[2]);
     getParkingLotFacadeInstance().parkCar(parkingLot, car);
   }
 
   public static void handleCarLeaves(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    if (null == parkingLot) throw new Exception(PARKING_LOT_NOT_CREATED);
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = leave.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    initializeHandlerMethod(parkingLot, PARKING_LOT_NOT_CREATED, commandAndArgs, leave);
     getParkingLotFacadeInstance().carLeaves(parkingLot, Integer.valueOf(commandAndArgs[1]));
   }
 
   public static void handlePrintStatus(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    if (null == parkingLot) throw new Exception(PARKING_LOT_NOT_CREATED);
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = status.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    initializeHandlerMethod(parkingLot, PARKING_LOT_NOT_CREATED, commandAndArgs, status);
     getParkingLotFacadeInstance().printStatus(parkingLot);
   }
 
   public static void handlePlatesByColor(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    if (null == parkingLot) throw new Exception(PARKING_LOT_NOT_CREATED);
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = registration_numbers_for_cars_with_colour.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    initializeHandlerMethod(
+        parkingLot,
+        PARKING_LOT_NOT_CREATED,
+        commandAndArgs,
+        registration_numbers_for_cars_with_colour);
     getParkingLotFacadeInstance().getPlatesByColor(parkingLot, commandAndArgs[1]);
   }
 
   public static void handleSlotByCarPlates(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    if (null == parkingLot) throw new Exception(PARKING_LOT_NOT_CREATED);
-    int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = slot_number_for_registration_number.getNumberOfArgs();
-    Assert.assertEquals(
-        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    initializeHandlerMethod(
+        parkingLot, PARKING_LOT_NOT_CREATED, commandAndArgs, slot_number_for_registration_number);
     getParkingLotFacadeInstance().getSlotByPlates(parkingLot, commandAndArgs[1]);
   }
 
   public static void handleSlotsByColor(ParkingLot parkingLot, String[] commandAndArgs)
       throws Exception {
-    if (null == parkingLot) throw new Exception(PARKING_LOT_NOT_CREATED);
+    initializeHandlerMethod(
+        parkingLot, PARKING_LOT_NOT_CREATED, commandAndArgs, slot_numbers_for_cars_with_colour);
+    getParkingLotFacadeInstance().getSlotsByColor(parkingLot, commandAndArgs[1]);
+  }
+
+  private static void initializeHandlerMethod(
+      ParkingLot parkingLot, String exceptionMessage, String[] commandAndArgs, Commands command)
+      throws Exception {
+    if (null == parkingLot) throw new Exception(exceptionMessage);
     int argsFromInput = commandAndArgs.length - 1;
-    int numberOfArgs = slot_numbers_for_cars_with_colour.getNumberOfArgs();
+    int numberOfArgs = command.getNumberOfArgs();
     Assert.assertEquals(
         String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    getParkingLotFacadeInstance().getSlotsByColor(parkingLot, commandAndArgs[1]);
   }
 
   public static ParkingLotFacade getParkingLotFacadeInstance() {
