@@ -81,4 +81,25 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
     if (spot.isPresent()) System.out.println(spot.get().getSlot() + 1);
     else System.out.println(String.format("not found", plate));
   }
+
+  public void getSlotsByColor(ParkingLot parkingLot, String color) {
+    List<Integer> spots =
+        parkingLot.getAvailableSpots().stream()
+            .filter(parkingSpot -> !parkingSpot.isSpotFree())
+            .filter(parkingSpot -> parkingSpot.getParkedCar().isCarThisColor(color))
+            .map(parkingSpot -> parkingSpot.getSlot())
+            .collect(Collectors.toList());
+    if (spots.isEmpty()) System.out.println(String.format("%s cars not found", color));
+    else {
+      boolean first = true;
+      for (Integer spot : spots) {
+        spot += 1;
+        if (first) {
+          first = false;
+          System.out.print(spot);
+        } else System.out.print(String.format(", %s", spot));
+      }
+      System.out.println();
+    }
+  }
 }
