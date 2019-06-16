@@ -12,4 +12,6 @@ public interface ParkingLotFacade {
   void carLeaves(ParkingLot parkingLot, int spot);
 
   void printStatus(ParkingLot parkingLot);
+
+  void getPlatesByColor(ParkingLot parkingLot, String color);
 }

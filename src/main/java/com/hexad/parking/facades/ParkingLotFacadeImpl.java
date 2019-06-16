@@ -4,7 +4,9 @@ import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingLot;
 import com.hexad.parking.models.ParkingSpot;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ParkingLotFacadeImpl implements ParkingLotFacade {
   public ParkingLot createParkingLot(int spots) {
@@ -48,5 +50,22 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
               parkingSpot.getSlot() + 1,
               parkingSpot.getParkedCar().getPlate(),
               parkingSpot.getParkedCar().getColor()));
+  }
+
+  public void getPlatesByColor(ParkingLot parkingLot, String color) {
+    List<String> plates =
+        parkingLot.getAvailableSpots().stream()
+            .filter(parkingSpot -> !parkingSpot.isSpotFree())
+            .filter(parkingSpot -> parkingSpot.getParkedCar().isCarThisColor(color))
+            .map(parkingSpot -> parkingSpot.getParkedCar().getPlate())
+            .collect(Collectors.toList());
+    boolean first = true;
+    for (String plate : plates) {
+      if (first) {
+        first = false;
+        System.out.print(plate);
+      } else System.out.print(String.format(", %s", plate));
+    }
+    System.out.println();
   }
 }
