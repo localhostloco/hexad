@@ -1,4 +1,4 @@
-package com.hexad.parking.services;
+package com.hexad.parking.facades;
 
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingLot;

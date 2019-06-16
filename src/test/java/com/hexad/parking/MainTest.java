@@ -2,7 +2,7 @@ package com.hexad.parking;
 
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingSpot;
-import com.hexad.parking.services.ParkingLotFacade;
+import com.hexad.parking.facades.ParkingLotFacade;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

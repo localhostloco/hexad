@@ -3,8 +3,8 @@ package com.hexad.parking;
 import com.hexad.parking.enums.Commands;
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingLot;
-import com.hexad.parking.services.ParkingLotFacade;
-import com.hexad.parking.services.ParkingLotFacadeImpl;
+import com.hexad.parking.facades.ParkingLotFacade;
+import com.hexad.parking.facades.ParkingLotFacadeImpl;
 import org.junit.Assert;
 
 import java.nio.file.Files;
