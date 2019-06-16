@@ -14,7 +14,6 @@ import static com.hexad.parking.helpers.CommandHandler.*;
 
 public class Main {
 
-  private static final String COMMAND_NOT_IMPLEMENTED = "command not implemented yet";
   private static ParkingLot parkingLot;
 
   public static void main(String[] args) {
@@ -76,7 +75,6 @@ public class Main {
         handleSlotsByColor(getParkingLot(), commandAndArgs);
         break;
       default:
-        throw new UnsupportedOperationException(COMMAND_NOT_IMPLEMENTED);
     }
     return commandAndArgs;
   }
