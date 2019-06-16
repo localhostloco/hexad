@@ -24,6 +24,7 @@ public class MainTest {
   @Before
   public void setup() {
     args = new ArrayList<>();
+    Main.restart();
   }
 
   @Test
@@ -41,9 +42,10 @@ public class MainTest {
   public void canParkCar() {
     setFileAndRun(testFiles[1]);
     Car car = new Car("KA-01-HH-1234", "White");
-    ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(1);
+    ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
     Car parkedCar = parkingSpot.getParkedCar();
-    Assert.assertEquals("Car does not match", parkedCar, car);
+    Assert.assertEquals("Car does not match", parkedCar.getColor(), car.getColor());
+    Assert.assertEquals("Car does not match", parkedCar.getPlate(), car.getPlate());
   }
 
   private void setFileAndRun(String filename) {

@@ -1,6 +1,7 @@
 package com.hexad.parking;
 
 import com.hexad.parking.enums.Commands;
+import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingLot;
 import com.hexad.parking.services.ParkingLotService;
 import com.hexad.parking.services.ParkingLotServiceImpl;
@@ -11,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-import static com.hexad.parking.enums.Commands.create_parking_lot;
+import static com.hexad.parking.enums.Commands.*;
 
 public class Main {
 
@@ -60,6 +61,8 @@ public class Main {
       case create_parking_lot:
         handleCreateParkingLot(commandAndArgs);
         break;
+      case park:
+        handleParkCar(commandAndArgs);
       default:
         break;
     }
@@ -75,7 +78,21 @@ public class Main {
     parkingLot = parkingLotService.createParkingLot(Integer.valueOf(commandAndArgs[1]));
   }
 
+  private static void handleParkCar(String[] commandAndArgs) throws Exception {
+    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
+    int argsFromInput = commandAndArgs.length - 1;
+    int numberOfArgs = park.getNumberOfArgs();
+    Assert.assertEquals(
+        String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    Car car = new Car(commandAndArgs[1], commandAndArgs[2]);
+    parkingLotService.parkCar(getParkingLot(), car);
+  }
+
   public static ParkingLot getParkingLot() {
     return parkingLot;
+  }
+
+  protected static void restart() {
+    parkingLot = null;
   }
 }
