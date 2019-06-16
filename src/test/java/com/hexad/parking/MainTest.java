@@ -73,10 +73,27 @@ public class MainTest {
   @Test
   public void canCheckStatus() throws IOException {
     System.setOut(new PrintStream(outContent));
-    setFileAndRun(testFiles[3]);
-    InputStream is = new FileInputStream(String.format("%s/%s", resourcesPath, "checkStatus.out"));
     setFileAndRun(inputTestFiles[3]);
+    String status = readFromFile("checkStatus.out");
+    Assert.assertEquals(status, outContent.toString().replace("\r", ""));
+  }
+
+  @Test
+  public void canGetCarPlatesByColor() throws IOException {
+    System.setOut(new PrintStream(outContent));
     setFileAndRun(inputTestFiles[4]);
+    String plates = readFromFile("carPlatesByColor.out");
+    Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
+  }
+
+  private void setFileAndRun(String filename) {
+    args.add(String.format("%s/%s", resourcesPath, filename));
+    argsArray = args.toArray(argsArray);
+    Main.main(argsArray);
+  }
+
+  private String readFromFile(String filename) throws IOException {
+    InputStream is = new FileInputStream(String.format("%s/%s", resourcesPath, filename));
     BufferedReader buf = new BufferedReader(new InputStreamReader(is));
     String line = buf.readLine();
     StringBuilder sb = new StringBuilder();
@@ -88,15 +105,8 @@ public class MainTest {
       } else sb.append("\n").append(line);
       line = buf.readLine();
     }
-    String status = sb.toString();
-    Assert.assertEquals(status, outContent.toString().replace("\r", ""));
     buf.close();
     is.close();
-  }
-
-  private void setFileAndRun(String filename) {
-    args.add(String.format("%s/%s", resourcesPath, filename));
-    argsArray = args.toArray(argsArray);
-    Main.main(argsArray);
+    return sb.toString();
   }
 }
