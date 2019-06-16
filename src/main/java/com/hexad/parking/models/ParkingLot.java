@@ -39,6 +39,19 @@ public class ParkingLot {
     else return availableSpots.get(slot);
   }
 
+  public String carLeaves(int spot) throws Exception {
+    if (spot > availableSpots.size())
+      throw new Exception("there is no such spot in the current ParkingLot");
+    String message = String.format("Slot number %d is free", spot);
+    spot -= 1;
+    ParkingSpot parkingSpot = availableSpots.get(spot);
+    parkingSpot.carLeaves();
+    if (null == nextAvailableSpot || nextAvailableSpot > spot) nextAvailableSpot = spot;
+    else calculateNextAvailableSpot();
+    isFull = false;
+    return message;
+  }
+
   private void calculateNextAvailableSpot() {
     Optional<ParkingSpot> freeSpot =
         availableSpots.stream().filter(ParkingSpot::isSpotFree).findFirst();

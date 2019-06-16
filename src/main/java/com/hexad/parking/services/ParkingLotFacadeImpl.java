@@ -19,6 +19,10 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
   }
 
   public void carLeaves(ParkingLot parkingLot, int spot) {
-    System.out.println(parkingLot.carLeaves(spot));
+    try {
+      System.out.println(parkingLot.carLeaves(spot));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
