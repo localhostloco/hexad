@@ -60,4 +60,8 @@ public class ParkingLot {
       nextAvailableSpot = null;
     } else nextAvailableSpot = freeSpot.get().getSlot();
   }
+
+  public List<ParkingSpot> getAvailableSpots() {
+    return availableSpots;
+  }
 }
