@@ -9,6 +9,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ParkingLotFacadeImpl implements ParkingLotFacade {
+
+  private static final String NOT_FOUND = "not found";
+
   public ParkingLot createParkingLot(int spots) {
     System.out.println(String.format("Created a parking lot with %d slots", spots));
     try {
@@ -46,7 +49,7 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
     if (!parkingSpot.isSpotFree())
       System.out.print(
           String.format(
-              "\n%d\t%s\t%s",
+              "%n%d\t%s\t%s",
               parkingSpot.getSlot() + 1,
               parkingSpot.getParkedCar().getPlate(),
               parkingSpot.getParkedCar().getColor()));
@@ -79,7 +82,7 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
             .filter(parkingSpot -> parkingSpot.getParkedCar().isPlateThis(plate))
             .findAny();
     if (spot.isPresent()) System.out.println(spot.get().getSlot() + 1);
-    else System.out.println(String.format("not found", plate));
+    else System.out.println(String.format(NOT_FOUND, plate));
   }
 
   public void getSlotsByColor(ParkingLot parkingLot, String color) {
@@ -87,9 +90,9 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
         parkingLot.getAvailableSpots().stream()
             .filter(parkingSpot -> !parkingSpot.isSpotFree())
             .filter(parkingSpot -> parkingSpot.getParkedCar().isCarThisColor(color))
-            .map(parkingSpot -> parkingSpot.getSlot())
+            .map(ParkingSpot::getSlot)
             .collect(Collectors.toList());
-    if (spots.isEmpty()) System.out.println(String.format("%s cars not found", color));
+    if (spots.isEmpty()) System.out.println(String.format("%s cars %s", color, NOT_FOUND));
     else {
       boolean first = true;
       for (Integer spot : spots) {
