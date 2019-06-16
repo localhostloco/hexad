@@ -14,4 +14,6 @@ public interface ParkingLotFacade {
   void printStatus(ParkingLot parkingLot);
 
   void getPlatesByColor(ParkingLot parkingLot, String color);
+
+  void getSlotByPlates(ParkingLot parkingLot, String plate);
 }

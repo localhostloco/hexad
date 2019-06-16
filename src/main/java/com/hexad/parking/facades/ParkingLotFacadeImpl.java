@@ -71,5 +71,14 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
       System.out.println();
     }
   }
+
+  public void getSlotByPlates(ParkingLot parkingLot, String plate) {
+    Optional<ParkingSpot> spot =
+        parkingLot.getAvailableSpots().stream()
+            .filter(parkingSpot -> !parkingSpot.isSpotFree())
+            .filter(parkingSpot -> parkingSpot.getParkedCar().isPlateThis(plate))
+            .findAny();
+    if (spot.isPresent()) System.out.println(spot.get().getSlot() + 1);
+    else System.out.println(String.format("not found", plate));
   }
 }
