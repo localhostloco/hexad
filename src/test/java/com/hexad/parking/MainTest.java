@@ -2,6 +2,7 @@ package com.hexad.parking;
 
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingSpot;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +29,11 @@ public class MainTest {
   public void setup() {
     args = new ArrayList<>();
     Main.restart();
+  }
+
+  @After
+  public void restoreStreams() {
+    System.setOut(System.out);
   }
 
   @Test
