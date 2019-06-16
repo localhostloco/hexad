@@ -19,8 +19,13 @@ public class MainTest {
   private final String resourcesPath = "src/test/java/resources";
   private String[] argsArray = {};
 
-  private String[] testFiles = {
-    "createParkingLot.in", "parkCar.in", "carLeaves.in", "checkStatus.in", "1.in"
+  private String[] inputTestFiles = {
+    "createParkingLot.in",
+    "parkCar.in",
+    "carLeaves.in",
+    "checkStatus.in",
+    "carPlatesByColor.in",
+    "1.in"
   };
 
   private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -43,13 +48,13 @@ public class MainTest {
 
   @Test
   public void canCreateParkingLot() {
-    setFileAndRun(testFiles[0]);
+    setFileAndRun(inputTestFiles[0]);
     Assert.assertEquals("ParkingLot's spots do not match", 1, Main.getParkingLot().getSize());
   }
 
   @Test
   public void canParkCar() {
-    setFileAndRun(testFiles[1]);
+    setFileAndRun(inputTestFiles[1]);
     Car car = new Car("KA-01-HH-1234", "White");
     ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
     Car parkedCar = parkingSpot.getParkedCar();
@@ -59,7 +64,7 @@ public class MainTest {
 
   @Test
   public void carCanLeave() {
-    setFileAndRun(testFiles[2]);
+    setFileAndRun(inputTestFiles[2]);
     ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
     Car parkedCar = parkingSpot.getParkedCar();
     Assert.assertEquals("There shouldn't be a Car parked but there is", null, parkedCar);
@@ -70,6 +75,8 @@ public class MainTest {
     System.setOut(new PrintStream(outContent));
     setFileAndRun(testFiles[3]);
     InputStream is = new FileInputStream(String.format("%s/%s", resourcesPath, "checkStatus.out"));
+    setFileAndRun(inputTestFiles[3]);
+    setFileAndRun(inputTestFiles[4]);
     BufferedReader buf = new BufferedReader(new InputStreamReader(is));
     String line = buf.readLine();
     StringBuilder sb = new StringBuilder();
