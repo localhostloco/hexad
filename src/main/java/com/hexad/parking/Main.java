@@ -1,6 +1,7 @@
 package com.hexad.parking;
 
 import com.hexad.parking.enums.Commands;
+import com.hexad.parking.exceptions.ParkingException;
 import com.hexad.parking.models.ParkingLot;
 import org.junit.Assert;
 
@@ -46,7 +47,7 @@ public class Main {
     }
   }
 
-  private static String[] interpretCommand(String line) throws Exception {
+  private static String[] interpretCommand(String line) throws ParkingException {
     String[] commandAndArgs = line.split(" ");
     Commands comm = Commands.findByCommand(commandAndArgs[0]);
     if (null == comm)
