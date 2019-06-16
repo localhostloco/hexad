@@ -18,7 +18,6 @@ public class Main {
 
   public static void main(String[] args) {
     Assert.assertNotNull(args);
-    parkingLotFacade = new ParkingLotFacadeImpl();
     // file input
     if (args.length > 0) {
       try (Stream<String> stream = Files.lines(Paths.get(args[0]))) {
