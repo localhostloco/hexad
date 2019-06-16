@@ -18,7 +18,7 @@ public class MainTest {
   private final String resourcesPath = "src/test/java/resources";
   private String[] argsArray = {};
 
-  private String[] testFiles = {"createParkingLot.in", "parkCar.in", "1.in"};
+  private String[] testFiles = {"createParkingLot.in", "parkCar.in", "carLeaves.in", "1.in"};
   private ParkingLotService parkingLotService;
 
   @Before
@@ -46,6 +46,14 @@ public class MainTest {
     Car parkedCar = parkingSpot.getParkedCar();
     Assert.assertEquals("Car color does not match", parkedCar.getColor(), car.getColor());
     Assert.assertEquals("Car plates do not match", parkedCar.getPlate(), car.getPlate());
+  }
+
+  @Test
+  public void carCanLeave() {
+    setFileAndRun(testFiles[2]);
+    ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
+    Car parkedCar = parkingSpot.getParkedCar();
+    Assert.assertEquals("There shouldn't be a Car parked but there is", parkedCar, null);
   }
 
   private void setFileAndRun(String filename) {
