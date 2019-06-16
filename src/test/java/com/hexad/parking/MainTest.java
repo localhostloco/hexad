@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,11 @@ public class MainTest {
   private final String resourcesPath = "src/test/java/resources";
   private String[] argsArray = {};
 
-  private String[] testFiles = {"createParkingLot.in", "parkCar.in", "carLeaves.in", "1.in"};
+  private String[] testFiles = {
+    "createParkingLot.in", "parkCar.in", "carLeaves.in", "checkStatus.in", "1.in"
+  };
+
+  private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
   @Before
   public void setup() {
@@ -52,6 +58,15 @@ public class MainTest {
     ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
     Car parkedCar = parkingSpot.getParkedCar();
     Assert.assertEquals("There shouldn't be a Car parked but there is", null, parkedCar);
+  }
+
+  @Test
+  public void canCheckStatus() {
+    System.setOut(new PrintStream(outContent));
+    setFileAndRun(testFiles[3]);
+    String status =
+        "Created a parking lot with 1 slots\nAllocated slot number: 1\nSlot No.\tRegistration No\tColour\n1\tKA-01-HH-1234\tWhite";
+    Assert.assertEquals(status, outContent.toString());
   }
 
   private void setFileAndRun(String filename) {
