@@ -6,8 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,12 +60,25 @@ public class MainTest {
   }
 
   @Test
-  public void canCheckStatus() {
+  public void canCheckStatus() throws IOException {
     System.setOut(new PrintStream(outContent));
     setFileAndRun(testFiles[3]);
-    String status =
-        "Created a parking lot with 1 slots\nAllocated slot number: 1\nSlot No.\tRegistration No\tColour\n1\tKA-01-HH-1234\tWhite";
-    Assert.assertEquals(status, outContent.toString());
+    InputStream is = new FileInputStream(String.format("%s/%s", resourcesPath, "checkStatus.out"));
+    BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+    String line = buf.readLine();
+    StringBuilder sb = new StringBuilder();
+    boolean first = true;
+    while (line != null) {
+      if (first) {
+        sb.append(line);
+        first = false;
+      } else sb.append("\n").append(line);
+      line = buf.readLine();
+    }
+    String status = sb.toString();
+    Assert.assertEquals(status, outContent.toString().replace("\r", ""));
+    buf.close();
+    is.close();
   }
 
   private void setFileAndRun(String filename) {
