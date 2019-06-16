@@ -18,6 +18,10 @@ public class Car {
   }
 
   public boolean isCarThisColor(String color) {
-    return this.color.equals(color);
+    return getColor().equals(color);
+  }
+
+  public boolean isPlateThis(String plate) {
+    return getPlate().equals(plate);
   }
 }
