@@ -69,6 +69,10 @@ public class Main {
         break;
       case status:
         handlePrintStatus(commandAndArgs);
+        break;
+      case registration_numbers_for_cars_with_colour:
+        handlePlatesByColor(commandAndArgs);
+        break;
       default:
         break;
     }
@@ -110,6 +114,15 @@ public class Main {
     Assert.assertEquals(
         String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
     parkingLotFacade.printStatus(getParkingLot());
+  }
+
+  private static void handlePlatesByColor(String[] commandAndArgs) throws Exception {
+    if (null == getParkingLot()) throw new Exception("ParkingLot has not been created yet!");
+    int argsFromInput = commandAndArgs.length - 1;
+    int numberOfArgs = registration_numbers_for_cars_with_colour.getNumberOfArgs();
+    Assert.assertEquals(
+            String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
+    parkingLotFacade.getPlatesByColor(getParkingLot(), commandAndArgs[1]);
   }
 
   public static ParkingLot getParkingLot() {
