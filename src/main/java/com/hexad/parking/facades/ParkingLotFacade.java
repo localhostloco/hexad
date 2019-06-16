@@ -10,4 +10,6 @@ public interface ParkingLotFacade {
   void parkCar(ParkingLot parkingLot, Car car);
 
   void carLeaves(ParkingLot parkingLot, int spot);
+
+  void printStatus(ParkingLot parkingLot);
 }
