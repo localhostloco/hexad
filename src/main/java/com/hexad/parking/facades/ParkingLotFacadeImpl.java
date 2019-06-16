@@ -59,13 +59,17 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
             .filter(parkingSpot -> parkingSpot.getParkedCar().isCarThisColor(color))
             .map(parkingSpot -> parkingSpot.getParkedCar().getPlate())
             .collect(Collectors.toList());
-    boolean first = true;
-    for (String plate : plates) {
-      if (first) {
-        first = false;
-        System.out.print(plate);
-      } else System.out.print(String.format(", %s", plate));
+    if (plates.isEmpty()) System.out.println(String.format("%s cars not found", color));
+    else {
+      boolean first = true;
+      for (String plate : plates) {
+        if (first) {
+          first = false;
+          System.out.print(plate);
+        } else System.out.print(String.format(", %s", plate));
+      }
+      System.out.println();
     }
-    System.out.println();
+  }
   }
 }
