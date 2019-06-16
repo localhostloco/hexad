@@ -44,8 +44,8 @@ public class MainTest {
     Car car = new Car("KA-01-HH-1234", "White");
     ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
     Car parkedCar = parkingSpot.getParkedCar();
-    Assert.assertEquals("Car does not match", parkedCar.getColor(), car.getColor());
-    Assert.assertEquals("Car does not match", parkedCar.getPlate(), car.getPlate());
+    Assert.assertEquals("Car color does not match", parkedCar.getColor(), car.getColor());
+    Assert.assertEquals("Car plates do not match", parkedCar.getPlate(), car.getPlate());
   }
 
   private void setFileAndRun(String filename) {
