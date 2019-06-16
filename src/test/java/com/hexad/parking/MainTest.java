@@ -90,7 +90,7 @@ public class MainTest {
   @Test
   public void canGetParkingSlotByCarPlates() throws IOException {
     System.setOut(new PrintStream(outContent));
-    setFileAndRun(inputTestFiles[4]);
+    setFileAndRun(inputTestFiles[5]);
     String plates = readFromFile("slotByPlates.out");
     Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
   }
