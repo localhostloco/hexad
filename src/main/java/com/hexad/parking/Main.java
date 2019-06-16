@@ -1,7 +1,6 @@
 package com.hexad.parking;
 
 import com.hexad.parking.enums.Commands;
-import com.hexad.parking.facades.ParkingLotFacadeImpl;
 import com.hexad.parking.models.ParkingLot;
 import org.junit.Assert;
 
@@ -14,6 +13,7 @@ import static com.hexad.parking.helpers.CommandHandler.*;
 
 public class Main {
 
+  private static final String COMMAND_NOT_IMPLEMENTED = "command not implemented yet";
   private static ParkingLot parkingLot;
 
   public static void main(String[] args) {
@@ -73,8 +73,9 @@ public class Main {
         break;
       case slot_numbers_for_cars_with_colour:
         handleSlotsByColor(getParkingLot(), commandAndArgs);
-      default:
         break;
+      default:
+        throw new UnsupportedOperationException(COMMAND_NOT_IMPLEMENTED);
     }
     return commandAndArgs;
   }
