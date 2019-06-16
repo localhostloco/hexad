@@ -9,5 +9,11 @@ public class Car {
     this.plate = plate;
   }
 
-  public Car() {}
+  public String getColor() {
+    return color;
+  }
+
+  public String getPlate() {
+    return plate;
+  }
 }
