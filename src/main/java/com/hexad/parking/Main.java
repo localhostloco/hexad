@@ -3,8 +3,8 @@ package com.hexad.parking;
 import com.hexad.parking.enums.Commands;
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingLot;
-import com.hexad.parking.services.ParkingLotService;
-import com.hexad.parking.services.ParkingLotServiceImpl;
+import com.hexad.parking.services.ParkingLotFacade;
+import com.hexad.parking.services.ParkingLotFacadeImpl;
 import org.junit.Assert;
 
 import java.nio.file.Files;
@@ -17,12 +17,12 @@ import static com.hexad.parking.enums.Commands.*;
 public class Main {
 
   private static String invalidNumberOfArgs = "invalid number of arguments (expected: %d)";
-  private static ParkingLotService parkingLotService;
+  private static ParkingLotFacade parkingLotFacade;
   private static ParkingLot parkingLot;
 
   public static void main(String[] args) {
     Assert.assertNotNull(args);
-    parkingLotService = new ParkingLotServiceImpl();
+    parkingLotFacade = new ParkingLotFacadeImpl();
     // file input
     if (args.length > 0) {
       try (Stream<String> stream = Files.lines(Paths.get(args[0]))) {
@@ -75,7 +75,7 @@ public class Main {
     int numberOfArgs = create_parking_lot.getNumberOfArgs();
     Assert.assertEquals(
         String.format(invalidNumberOfArgs, numberOfArgs), numberOfArgs, argsFromInput);
-    parkingLot = parkingLotService.createParkingLot(Integer.valueOf(commandAndArgs[1]));
+    parkingLot = parkingLotFacade.createParkingLot(Integer.valueOf(commandAndArgs[1]));
   }
 
   private static void handleParkCar(String[] commandAndArgs) throws Exception {

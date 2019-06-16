@@ -3,8 +3,7 @@ package com.hexad.parking.services;
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingLot;
 
-public class ParkingLotServiceImpl implements ParkingLotService {
-  @Override
+public class ParkingLotFacadeImpl implements ParkingLotFacade {
   public ParkingLot createParkingLot(int spots) {
     System.out.println(String.format("Created a parking lot with %d slots", spots));
     try {
@@ -15,8 +14,11 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     return null;
   }
 
-  @Override
   public void parkCar(ParkingLot parkingLot, Car car) {
     System.out.println(parkingLot.parkCar(car));
+  }
+
+  public void carLeaves(ParkingLot parkingLot, int spot) {
+    System.out.println(parkingLot.carLeaves(spot));
   }
 }
