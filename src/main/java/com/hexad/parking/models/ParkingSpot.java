@@ -22,4 +22,12 @@ public class ParkingSpot {
   public Car getParkedCar() {
     return parkedCar;
   }
+
+  public boolean isSpotFree() {
+    return isSpotFree;
+  }
+
+  public int getSlot() {
+    return slot;
+  }
 }
