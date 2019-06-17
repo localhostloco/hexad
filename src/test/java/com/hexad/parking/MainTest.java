@@ -78,7 +78,7 @@ public class MainTest {
 
   @Test
   public void canCheckStatus() throws IOException, ParkingException {
-    System.setOut(new PrintStream(outContent));
+    prepareOutputToBeIntercepted();
     setFileAndRun(inputTestFiles[3]);
     String status = readFromFile("checkStatus.out");
     Assert.assertEquals(status, outContent.toString().replace("\r", ""));
@@ -86,7 +86,7 @@ public class MainTest {
 
   @Test
   public void canGetCarPlatesByColor() throws IOException, ParkingException {
-    System.setOut(new PrintStream(outContent));
+    prepareOutputToBeIntercepted();
     setFileAndRun(inputTestFiles[4]);
     String plates = readFromFile("carPlatesByColor.out");
     Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
@@ -94,7 +94,7 @@ public class MainTest {
 
   @Test
   public void canGetParkingSlotByCarPlates() throws IOException, ParkingException {
-    System.setOut(new PrintStream(outContent));
+    prepareOutputToBeIntercepted();
     setFileAndRun(inputTestFiles[5]);
     String plates = readFromFile("slotByPlates.out");
     Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
@@ -102,7 +102,7 @@ public class MainTest {
 
   @Test
   public void canGetSlotsByColor() throws IOException, ParkingException {
-    System.setOut(new PrintStream(outContent));
+    prepareOutputToBeIntercepted();
     setFileAndRun(inputTestFiles[6]);
     String plates = readFromFile("slotsByColor.out");
     Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
@@ -110,7 +110,7 @@ public class MainTest {
 
   @Test
   public void happyPathFromSpecification() throws IOException, ParkingException {
-    System.setOut(new PrintStream(outContent));
+    prepareOutputToBeIntercepted();
     setFileAndRun(inputTestFiles[7]);
     String plates = readFromFile("1.out");
     Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
@@ -159,7 +159,7 @@ public class MainTest {
     InputStream manualInput = new ByteArrayInputStream(specInput.getBytes());
     System.setIn(manualInput);
     argsArray = args.toArray(argsArray);
-    System.setOut(new PrintStream(outContent));
+    prepareOutputToBeIntercepted();
     Main.main(argsArray);
     String outputAfterRun = readFromFile("1.out");
     Assert.assertEquals(outputAfterRun, outContent.toString().replace("\r", ""));
@@ -187,5 +187,9 @@ public class MainTest {
     buf.close();
     is.close();
     return sb.toString();
+  }
+
+  private void prepareOutputToBeIntercepted() {
+    System.setOut(new PrintStream(outContent));
   }
 }
