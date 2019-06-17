@@ -29,7 +29,9 @@ public class MainTest {
     "slotByPlates.in",
     "slotsByColor.in",
     "1.in",
-    "severalCarCanLeaveFromStart.in"
+    "severalCarCanLeaveFromStart.in",
+    "maxOverflow.in",
+    "minOverflow.in"
   };
 
   private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -126,7 +128,17 @@ public class MainTest {
     }
   }
 
-  private void setFileAndRun(String filename) {
+  @Test
+  public void maxOverflowThrowsException() {
+    assertThrows(NumberFormatException.class, () -> setFileAndRun(inputTestFiles[9]));
+  }
+
+  @Test
+  public void minOverflowThrowsException() {
+    assertThrows(NumberFormatException.class, () -> setFileAndRun(inputTestFiles[10]));
+  }
+
+  private void setFileAndRun(String filename) throws IOException, ParkingException {
     args.add(String.format("%s/%s", resourcesPath, filename));
     argsArray = args.toArray(argsArray);
     Main.main(argsArray);
