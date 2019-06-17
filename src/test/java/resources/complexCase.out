@@ -1,0 +1,72 @@
+Created a parking lot with 214748364 slots
+Allocated slot number: 1
+Allocated slot number: 2
+Allocated slot number: 3
+Allocated slot number: 4
+Allocated slot number: 5
+Allocated slot number: 6
+Allocated slot number: 7
+Allocated slot number: 8
+Allocated slot number: 9
+Allocated slot number: 10
+Allocated slot number: 11
+Allocated slot number: 12
+Allocated slot number: 13
+Allocated slot number: 14
+Allocated slot number: 15
+Allocated slot number: 16
+Allocated slot number: 17
+Allocated slot number: 18
+Slot number 4 is free
+Allocated slot number: 4
+Slot number 17 is free
+Slot number 10 is free
+Allocated slot number: 10
+Slot number 1 is free
+Allocated slot number: 1
+Slot number 9 is free
+Slot number 3 is free
+Slot number 13 is free
+Slot No.	Registration No	Colour
+1	KA-01-HH-5363	Black
+2	KA-01-HH-9999	White
+4	KA-01-HH-6565	Red
+5	KA-01-HH-2701	Blue
+6	KA-01-HH-3141	Black
+7	KA-01-HH-4321	White
+8	KA-01-HH-8888	White
+10	KA-01-HH-4923	Blue
+11	KA-01-HH-3812	Blue
+12	KA-01-HH-4252	Black
+14	KA-01-HH-7654	White
+15	KA-01-BB-0003	Black
+16	KA-01-HH-6565	Red
+18	KA-01-HH-5363	Black
+Allocated slot number: 3
+Allocated slot number: 9
+KA-01-HH-9999, KA-01-P-333, KA-01-HH-4321, KA-01-HH-8888, DL-12-AA-9999, KA-01-HH-7654
+KA-01-HH-5363, KA-01-HH-3141, KA-01-HH-4252, KA-01-BB-0003, KA-01-HH-5363
+KA-01-HH-2701, KA-01-HH-4923, KA-01-HH-3812
+4, 16
+Yellow cars Not found
+15
+Not found
+Cyan cars not found
+Slot No.	Registration No	Colour
+1	KA-01-HH-5363	Black
+2	KA-01-HH-9999	White
+3	KA-01-P-333	White
+4	KA-01-HH-6565	Red
+5	KA-01-HH-2701	Blue
+6	KA-01-HH-3141	Black
+7	KA-01-HH-4321	White
+8	KA-01-HH-8888	White
+9	DL-12-AA-9999	White
+10	KA-01-HH-4923	Blue
+11	KA-01-HH-3812	Blue
+12	KA-01-HH-4252	Black
+14	KA-01-HH-7654	White
+15	KA-01-BB-0003	Black
+16	KA-01-HH-6565	Red
+18	KA-01-HH-5363	Black
+

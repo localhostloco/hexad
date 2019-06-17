@@ -1,0 +1,41 @@
+create_parking_lot 214748364
+park KA-01-HH-1234 White
+park KA-01-HH-9999 White
+park KA-01-BB-0001 Black
+park KA-01-HH-7777 Red
+park KA-01-HH-2701 Blue
+park KA-01-HH-3141 Black
+park KA-01-HH-4321 White
+park KA-01-HH-8888 White
+park KA-01-BB-0002 Black
+park KA-01-HH-6666 Red
+park KA-01-HH-3812 Blue
+park KA-01-HH-4252 Black
+park KA-01-HH-4444 White
+park KA-01-HH-7654 White
+park KA-01-BB-0003 Black
+park KA-01-HH-6565 Red
+park KA-01-HH-4923 Blue
+park KA-01-HH-5363 Black
+leave 4
+park KA-01-HH-6565 Red
+leave 17
+leave 10
+park KA-01-HH-4923 Blue
+leave 1
+park KA-01-HH-5363 Black
+leave 9
+leave 3
+leave 13
+status
+park KA-01-P-333 White
+park DL-12-AA-9999 White
+registration_numbers_for_cars_with_colour White
+registration_numbers_for_cars_with_colour Black
+registration_numbers_for_cars_with_colour Blue
+slot_numbers_for_cars_with_colour Red
+slot_numbers_for_cars_with_colour Yellow
+slot_number_for_registration_number KA-01-BB-0003
+slot_number_for_registration_number ZZ-ZZ-ZZ-ZZZZ
+registration_numbers_for_cars_with_colour Cyan
+status
