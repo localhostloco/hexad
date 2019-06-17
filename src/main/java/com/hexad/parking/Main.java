@@ -5,6 +5,7 @@ import com.hexad.parking.exceptions.ParkingException;
 import com.hexad.parking.models.ParkingLot;
 import org.junit.Assert;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class Main {
 
   private static ParkingLot parkingLot;
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ParkingException, IOException {
     Assert.assertNotNull(args);
     // file input
     if (args.length > 0) {
@@ -29,19 +30,13 @@ public class Main {
                 e.printStackTrace();
               }
             });
-      } catch (Exception e) {
-        e.printStackTrace();
       }
     }
     // interactive mode
     else {
       Scanner scanner = new Scanner(System.in);
       while (scanner.hasNext()) {
-        try {
-          interpretCommand(scanner.nextLine());
-        } catch (ParkingException e) {
-          e.printStackTrace();
-        }
+        interpretCommand(scanner.nextLine());
       }
     }
   }

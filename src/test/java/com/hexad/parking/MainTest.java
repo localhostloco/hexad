@@ -1,5 +1,6 @@
 package com.hexad.parking;
 
+import com.hexad.parking.exceptions.ParkingException;
 import com.hexad.parking.models.Car;
 import com.hexad.parking.models.ParkingSpot;
 import org.junit.After;
@@ -50,13 +51,13 @@ public class MainTest {
   }
 
   @Test
-  public void canCreateParkingLot() {
+  public void canCreateParkingLot() throws IOException, ParkingException {
     setFileAndRun(inputTestFiles[0]);
     Assert.assertEquals("ParkingLot's spots do not match", 1, Main.getParkingLot().getSize());
   }
 
   @Test
-  public void canParkCar() {
+  public void canParkCar() throws IOException, ParkingException {
     setFileAndRun(inputTestFiles[1]);
     Car car = new Car("KA-01-HH-1234", "White");
     ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
@@ -66,7 +67,7 @@ public class MainTest {
   }
 
   @Test
-  public void carCanLeave() {
+  public void carCanLeave() throws IOException, ParkingException {
     setFileAndRun(inputTestFiles[2]);
     ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(0);
     Car parkedCar = parkingSpot.getParkedCar();
@@ -74,7 +75,7 @@ public class MainTest {
   }
 
   @Test
-  public void canCheckStatus() throws IOException {
+  public void canCheckStatus() throws IOException, ParkingException {
     System.setOut(new PrintStream(outContent));
     setFileAndRun(inputTestFiles[3]);
     String status = readFromFile("checkStatus.out");
@@ -82,7 +83,7 @@ public class MainTest {
   }
 
   @Test
-  public void canGetCarPlatesByColor() throws IOException {
+  public void canGetCarPlatesByColor() throws IOException, ParkingException {
     System.setOut(new PrintStream(outContent));
     setFileAndRun(inputTestFiles[4]);
     String plates = readFromFile("carPlatesByColor.out");
@@ -90,7 +91,7 @@ public class MainTest {
   }
 
   @Test
-  public void canGetParkingSlotByCarPlates() throws IOException {
+  public void canGetParkingSlotByCarPlates() throws IOException, ParkingException {
     System.setOut(new PrintStream(outContent));
     setFileAndRun(inputTestFiles[5]);
     String plates = readFromFile("slotByPlates.out");
@@ -98,7 +99,7 @@ public class MainTest {
   }
 
   @Test
-  public void canGetSlotsByColor() throws IOException {
+  public void canGetSlotsByColor() throws IOException, ParkingException {
     System.setOut(new PrintStream(outContent));
     setFileAndRun(inputTestFiles[6]);
     String plates = readFromFile("slotsByColor.out");
@@ -106,7 +107,7 @@ public class MainTest {
   }
 
   @Test
-  public void happyPathFromSpecification() throws IOException {
+  public void happyPathFromSpecification() throws IOException, ParkingException {
     System.setOut(new PrintStream(outContent));
     setFileAndRun(inputTestFiles[7]);
     String plates = readFromFile("1.out");
@@ -114,7 +115,7 @@ public class MainTest {
   }
 
   @Test
-  public void severalCarCanLeaveFromStart() {
+  public void severalCarCanLeaveFromStart() throws IOException, ParkingException {
     final int totalSpots = 6;
     final int totalEmptySpots = 4;
     setFileAndRun(inputTestFiles[8]);
