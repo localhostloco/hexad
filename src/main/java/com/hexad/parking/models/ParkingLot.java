@@ -13,9 +13,13 @@ public class ParkingLot {
   private boolean isFull;
 
   public ParkingLot(int spots) throws ParkingException {
-    if (spots < 1)
+    if (spots < 1 || spots < Integer.MIN_VALUE)
       throw new ParkingException(
           "cannot create a ParkingLot with 0 slots or less", new Throwable());
+    else if (spots > Integer.MAX_VALUE)
+      throw new ParkingException(
+          String.format("cannot create a ParkingLot with more than %d", Integer.MAX_VALUE),
+          new Throwable());
     this.availableSpots = Arrays.asList(new ParkingSpot[spots]);
     for (int i = 0; i < availableSpots.size(); i++) availableSpots.set(i, new ParkingSpot(i));
     this.nextAvailableSpot = 0;
