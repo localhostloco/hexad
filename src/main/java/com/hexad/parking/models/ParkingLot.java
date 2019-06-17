@@ -20,6 +20,7 @@ public class ParkingLot {
     for (int i = 0; i < availableSpots.size(); i++) availableSpots.set(i, new ParkingSpot(i));
     this.nextAvailableSpot = 0;
     this.isFull = false;
+    System.out.println(String.format("Created a parking lot with %d slots", spots));
   }
 
   public int getSize() {

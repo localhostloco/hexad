@@ -14,7 +14,6 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
   private static final String NOT_FOUND = "not found";
 
   public ParkingLot createParkingLot(int spots) {
-    System.out.println(String.format("Created a parking lot with %d slots", spots));
     try {
       return new ParkingLot(spots);
     } catch (ParkingException e) {
