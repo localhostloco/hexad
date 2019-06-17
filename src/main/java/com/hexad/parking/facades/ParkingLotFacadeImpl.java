@@ -13,25 +13,16 @@ public class ParkingLotFacadeImpl implements ParkingLotFacade {
 
   private static final String NOT_FOUND = "Not found";
 
-  public ParkingLot createParkingLot(int spots) {
-    try {
-      return new ParkingLot(spots);
-    } catch (ParkingException e) {
-      e.printStackTrace();
-    }
-    return null;
+  public ParkingLot createParkingLot(int spots) throws ParkingException {
+    return new ParkingLot(spots);
   }
 
   public void parkCar(ParkingLot parkingLot, Car car) {
     System.out.println(parkingLot.parkCar(car));
   }
 
-  public void carLeaves(ParkingLot parkingLot, int spot) {
-    try {
-      System.out.println(parkingLot.carLeaves(spot));
-    } catch (ParkingException e) {
-      e.printStackTrace();
-    }
+  public void carLeaves(ParkingLot parkingLot, int spot) throws ParkingException {
+    System.out.println(parkingLot.carLeaves(spot));
   }
 
   public void printStatus(ParkingLot parkingLot) {
