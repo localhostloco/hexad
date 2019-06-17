@@ -104,6 +104,14 @@ public class MainTest {
     Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
   }
 
+  @Test
+  public void happyPathFromSpecification() throws IOException {
+    System.setOut(new PrintStream(outContent));
+    setFileAndRun(inputTestFiles[7]);
+    String plates = readFromFile("1.out");
+    Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
+  }
+
   private void setFileAndRun(String filename) {
     args.add(String.format("%s/%s", resourcesPath, filename));
     argsArray = args.toArray(argsArray);
