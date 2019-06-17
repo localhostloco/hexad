@@ -27,7 +27,8 @@ public class MainTest {
     "carPlatesByColor.in",
     "slotByPlates.in",
     "slotsByColor.in",
-    "1.in"
+    "1.in",
+    "severalCarCanLeaveFromStart.in"
   };
 
   private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -110,6 +111,18 @@ public class MainTest {
     setFileAndRun(inputTestFiles[7]);
     String plates = readFromFile("1.out");
     Assert.assertEquals(plates, outContent.toString().replace("\r", ""));
+  }
+
+  @Test
+  public void severalCarCanLeaveFromStart() {
+    final int totalSpots = 6;
+    final int totalEmptySpots = 4;
+    setFileAndRun(inputTestFiles[8]);
+    for (int i = 0; i < totalSpots; i++) {
+      ParkingSpot parkingSpot = Main.getParkingLot().getParkingSpotBySlot(i);
+      if (i < totalEmptySpots) Assert.assertNull(parkingSpot.getParkedCar());
+      else Assert.assertNotNull(parkingSpot.getParkedCar());
+    }
   }
 
   private void setFileAndRun(String filename) {
