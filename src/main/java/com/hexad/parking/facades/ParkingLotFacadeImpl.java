@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class ParkingLotFacadeImpl implements ParkingLotFacade {
 
-  private static final String NOT_FOUND = "not found";
+  private static final String NOT_FOUND = "Not found";
 
   public ParkingLot createParkingLot(int spots) {
     try {
