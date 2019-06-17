@@ -31,7 +31,8 @@ public class MainTest {
     "1.in",
     "severalCarCanLeaveFromStart.in",
     "maxOverflow.in",
-    "minOverflow.in"
+    "minOverflow.in",
+    "complexCase.in"
   };
 
   private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -163,6 +164,15 @@ public class MainTest {
     Main.main(argsArray);
     String outputAfterRun = readFromFile("1.out");
     Assert.assertEquals(outputAfterRun, outContent.toString().replace("\r", ""));
+  }
+
+  @Test
+  public void hugeParkingLotHandlesMemoryAndOperations() throws IOException, ParkingException {
+    // takes approximately 19s146ms to run --> 214748364 slots
+    prepareOutputToBeIntercepted();
+    setFileAndRun(inputTestFiles[11]);
+    String output = readFromFile("complexCase.out");
+    Assert.assertEquals(output, outContent.toString().replace("\r", ""));
   }
 
   private void setFileAndRun(String filename) throws IOException, ParkingException {
