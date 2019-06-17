@@ -138,6 +138,33 @@ public class MainTest {
     assertThrows(NumberFormatException.class, () -> setFileAndRun(inputTestFiles[10]));
   }
 
+  @Test
+  public void interactiveModeWorks() throws IOException, ParkingException {
+    String specInput =
+        "create_parking_lot 6\n"
+            + "park KA-01-HH-1234 White\n"
+            + "park KA-01-HH-9999 White\n"
+            + "park KA-01-BB-0001 Black\n"
+            + "park KA-01-HH-7777 Red\n"
+            + "park KA-01-HH-2701 Blue\n"
+            + "park KA-01-HH-3141 Black\n"
+            + "leave 4\n"
+            + "status\n"
+            + "park KA-01-P-333 White\n"
+            + "park DL-12-AA-9999 White\n"
+            + "registration_numbers_for_cars_with_colour White\n"
+            + "slot_numbers_for_cars_with_colour White\n"
+            + "slot_number_for_registration_number KA-01-HH-3141\n"
+            + "slot_number_for_registration_number MH-04-AY-1111";
+    InputStream manualInput = new ByteArrayInputStream(specInput.getBytes());
+    System.setIn(manualInput);
+    argsArray = args.toArray(argsArray);
+    System.setOut(new PrintStream(outContent));
+    Main.main(argsArray);
+    String outputAfterRun = readFromFile("1.out");
+    Assert.assertEquals(outputAfterRun, outContent.toString().replace("\r", ""));
+  }
+
   private void setFileAndRun(String filename) throws IOException, ParkingException {
     args.add(String.format("%s/%s", resourcesPath, filename));
     argsArray = args.toArray(argsArray);
