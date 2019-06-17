@@ -168,7 +168,7 @@ public class MainTest {
 
   @Test
   public void hugeParkingLotHandlesMemoryAndOperations() throws IOException, ParkingException {
-    // takes approximately 19s146ms to run --> 214748364 slots
+    // takes approximately 19s146ms to run --> 2147483 slots
     prepareOutputToBeIntercepted();
     setFileAndRun(inputTestFiles[11]);
     String output = readFromFile("complexCase.out");
